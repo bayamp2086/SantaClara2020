@@ -1,0 +1,9 @@
+<suite name="suite1">
+
+    <test name = "string-tests">
+      <classes>
+        <class name = "com.bayamp.pleasanton2020.utils.stringutils.tests.StringUtilsTests" />
+      </classes>
+    </test>
+
+</suite>
