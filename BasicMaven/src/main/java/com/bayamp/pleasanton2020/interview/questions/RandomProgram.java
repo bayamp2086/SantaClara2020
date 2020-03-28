@@ -1,9 +1,6 @@
 package com.bayamp.pleasanton2020.interview.questions;
 
 import com.bayamp.pleasanton2020.utils.RandomUtil;
-import com.sun.javafx.binding.StringFormatter;
-
-import java.util.*;
 
 public class RandomProgram {
 
