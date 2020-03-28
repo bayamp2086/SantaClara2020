@@ -1,6 +1,6 @@
-package com.bayamp.pleasanton2020.interview.questions;
+package com.bayamp.santaclara2020.interview.questions;
 
-import com.bayamp.pleasanton2020.utils.RandomUtil;
+import com.bayamp.santaclara2020.utils.RandomUtil;
 
 public class RandomProgram {
 

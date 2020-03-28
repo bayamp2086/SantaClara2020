@@ -75,4 +75,8 @@ public class RandomUtil {
         SimpleDateFormat dateFormat = new SimpleDateFormat(strFormat);
         return dateFormat.format(date);
     }
+
+	public static String generateRandomPhoneNumber() {
+		return null;
+	}
 }
