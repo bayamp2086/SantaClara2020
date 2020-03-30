@@ -14,6 +14,7 @@ public class DummyBase {
     @BeforeClass
     public void dummyBeforeClassInDummyBase() {
         Reporter.log("this is my parent @BEfore class of dummyBeforeClassInDummyBase: ",true);
+        Reporter.log("This method has been modified",true);
     }
 
     @Test
