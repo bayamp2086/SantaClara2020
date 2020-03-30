@@ -6,10 +6,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author swatipathak
+ *
+ */
 public class RandomUtil {
 
-    //private static final String DATE_FORMAT = "MM/dd/YYYY HH:mm";
-
+    /**
+     * Method to generate a random long number
+     * @return
+     */
     public static long getRandomLongNumber( ) {
         Random randomObject = new Random();
         long randomNumber = randomObject.nextLong() ;
@@ -25,17 +31,31 @@ public class RandomUtil {
      * @param numberOfDigits
      * @return
      */
-    public static String getRandomStringOfLen(int numberOfDigits ) {
-        Random randomObject = new Random();
+    public static String getRandomStringOfLen(int numberOfDigits) {
 
-        int nextRandom = randomObject.nextInt(1000); //0-999
+		Random randomObject = new Random();
+		StringBuilder digitFormat = new StringBuilder();
+		StringBuilder bound = new StringBuilder();
+		digitFormat.append("%0" + numberOfDigits + "d");
 
-        String str = String.format("%03d",nextRandom);
+		bound.append("1");
+		for (int i = 0; i < numberOfDigits; i++) {
+			bound.append("0");
+		}
+		int boundValue = Integer.parseInt(bound.toString());
 
-        return str;
+		//int randomIntNumber = randomObject.nextInt(boundValue);
+		int randomIntNumber = randomObject.nextInt(boundValue - boundValue / 10) + boundValue / 10;
+		String str = String.format(digitFormat.toString(), randomIntNumber);
 
-    }
+		return str;
+	}
+    
 
+    /**
+     * Method to generate a random number using current time in milliseconds
+     * @return
+     */
     public static long getRandomNumberAsMilliSeconds( ) {
         try {
             Thread.sleep(1000);
@@ -46,6 +66,10 @@ public class RandomUtil {
     }
 
 
+    /**
+     * Method to generate a random string in milliseconds
+     * @return
+     */
     public static String getRandomSringAsMilliSeconds( ) {
         try {
             Thread.sleep(1000);
@@ -58,11 +82,19 @@ public class RandomUtil {
 
     }
 
+    /**
+     * generates RandomFirstName
+     * @return
+     */
     public static String getRandomFirstName() {
 
         return "TestUserF"+getRandomNumberAsMilliSeconds();
     }
 
+    /**
+     * generates Date
+     * @return
+     */
     public static String getDate() {
 
         Date date = new Date();
@@ -70,13 +102,33 @@ public class RandomUtil {
         return format.format(date);
     }
 
+    /**
+     * generates Date in specified format
+     * @param strFormat
+     * @return
+     */
     public static String getDate(String strFormat) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat(strFormat);
         return dateFormat.format(date);
     }
 
+    /**
+     * generates RandomSSN
+	 * @return
+	 */
+	public static String generateRandomSSN() {
+
+		return getRandomStringOfLen(3) + "-" + getRandomStringOfLen(2) + "-" + getRandomStringOfLen(4);
+	}
+
+	/**
+	 * generates RandomPhoneNumber
+	 * @return
+	 */
 	public static String generateRandomPhoneNumber() {
-		return null;
+
+		return "(" + getRandomStringOfLen(3) + ")" + getRandomStringOfLen(3) + "-"
+				+ getRandomStringOfLen(4);
 	}
 }
