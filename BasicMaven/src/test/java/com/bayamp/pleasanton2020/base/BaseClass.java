@@ -8,6 +8,7 @@ public class BaseClass {
     @AfterMethod
     public void cleanUp() {
         Reporter.log("Let me clean up the data for this test");
+        Reporter.log("This method has been modified");
     }
 
 }
