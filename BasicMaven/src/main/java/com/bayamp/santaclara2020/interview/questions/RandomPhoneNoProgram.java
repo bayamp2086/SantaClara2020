@@ -2,7 +2,7 @@ package com.bayamp.santaclara2020.interview.questions;
 
 import com.bayamp.santaclara2020.utils.RandomUtil;
 
-public class RandomProgram {
+public class RandomPhoneNoProgram {
 
     public static void main(String[] args) {
 
