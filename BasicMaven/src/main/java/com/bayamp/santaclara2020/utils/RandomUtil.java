@@ -12,17 +12,15 @@ import java.util.Random;
  */
 public class RandomUtil {
 
-    /**
-     * Method to generate a random long number
-     * @return
-     */
+    //private static final String DATE_FORMAT = "MM/dd/YYYY HH:mm";
+
     public static long getRandomLongNumber( ) {
         Random randomObject = new Random();
         long randomNumber = randomObject.nextLong() ;
 
-        return randomNumber;
+		return randomNumber;
 
-    }
+	}
 
     /**
      * if parameter value is 1 (return any random number from 0-9)
