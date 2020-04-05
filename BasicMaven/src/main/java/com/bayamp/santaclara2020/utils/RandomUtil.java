@@ -124,7 +124,7 @@ public class RandomUtil {
 	 * generates RandomPhoneNumber
 	 * @return
 	 */
-	public static String generateRandomPhoneNumber() {
+	public static String generateRandomPhoneNumberHarish() {
 
 		return "(" + getRandomStringOfLen(3) + ")" + getRandomStringOfLen(3) + "-"
 				+ getRandomStringOfLen(4);
