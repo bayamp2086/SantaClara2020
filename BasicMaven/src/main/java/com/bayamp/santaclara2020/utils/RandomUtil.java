@@ -23,9 +23,9 @@ public class RandomUtil {
 	}
 
     /**
-     * if parameter value is 1 or 2 (return any random number from 0-9)
-     * if parameter value is 2 or 3 (return any random number from 10-99)
-     * if parameter value is 3 or 4 (return any random number from 100-999)
+     * if parameter value is 1 (return any random number from 0-9)
+     * if parameter value is 2 (return any random number from 10-99)
+     * if parameter value is 3 (return any random number from 100-999)
      * @param numberOfDigits
      * @return
      */
@@ -124,7 +124,7 @@ public class RandomUtil {
 	 * generates RandomPhoneNumber
 	 * @return
 	 */
-	public static String generateRandomPhoneNumberHarish() {
+	public static String generateRandomPhoneNumber() {
 
 		return "(" + getRandomStringOfLen(3) + ")" + getRandomStringOfLen(3) + "-"
 				+ getRandomStringOfLen(4);
