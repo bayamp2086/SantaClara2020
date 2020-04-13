@@ -1,4 +1,4 @@
-package com.bayamp.santaclara2020.apitests;
+package com.bayamp.santaclara2020.dummy.selenium.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,7 +50,7 @@ public class BayampLoginTests {
         WebDriverWait wait = new WebDriverWait(driver, 30);// max of 30 secs
         wait.until(ExpectedConditions.visibilityOf(userField));
         // ExpectedConditions.presenceOfAllElementsLocatedBy(locator);
-
+        
         userField.sendKeys("user1@bayamp.com");
 
         passwordField.sendKeys("user1");
