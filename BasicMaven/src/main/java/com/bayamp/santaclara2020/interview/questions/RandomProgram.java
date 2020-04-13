@@ -18,12 +18,13 @@ public class RandomProgram {
 		System.out.println(date);
 
 		// Random number of length
-		Set<String> randomNumbers = new TreeSet<>();
+		Set<Integer> uniqueNumbers = new TreeSet<>();
+		int number;
 		for (int i = 0; i < 5; i++) {
-			String randomString = RandomUtil.getRandomStringOfLen(8);
-			randomNumbers.add(randomString);
+			number = RandomUtil.getRandomStringOfLen(7);
+			uniqueNumbers.add(number);
 		}
-		System.out.println(randomNumbers);
+		System.out.println(uniqueNumbers);
 
 		// Random SSN
 		for (int i = 0; i < 5; i++) {
