@@ -1,132 +1,146 @@
 package com.bayamp.santaclara2020.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
-/**
- * @author swatipathak
- *
- */
 public class RandomUtil {
 
-    //private static final String DATE_FORMAT = "MM/dd/YYYY HH:mm";
-
-    public static long getRandomLongNumber( ) {
+    /**
+     * Method to generate a Random Number
+     *
+     * @return long
+     */
+    public static long getRandomLongNumber() {
         Random randomObject = new Random();
-        long randomNumber = randomObject.nextLong() ;
-
-		return randomNumber;
-
-	}
+        long randomNumber = randomObject.nextLong();
+        return randomNumber;
+    }
 
     /**
-     * if parameter value is 1 (return any random number from 0-9)
-     * if parameter value is 2 (return any random number from 10-99)
-     * if parameter value is 3 (return any random number from 100-999)
-     * @param numberOfDigits
-     * @return
+     * Method to generate a Random Number
+     *
+     * @return int
      */
-    public static String getRandomStringOfLen(int numberOfDigits) {
-
-		Random randomObject = new Random();
-		StringBuilder digitFormat = new StringBuilder();
-		StringBuilder bound = new StringBuilder();
-		digitFormat.append("%0" + numberOfDigits + "d");
-
-		bound.append("1");
-		for (int i = 0; i < numberOfDigits; i++) {
-			bound.append("0");
-		}
-		int boundValue = Integer.parseInt(bound.toString());
-
-		//int randomIntNumber = randomObject.nextInt(boundValue);
-		int randomIntNumber = randomObject.nextInt(boundValue - boundValue / 10) + boundValue / 10;
-		String str = String.format(digitFormat.toString(), randomIntNumber);
-
-		return str;
-	}
-    
+    public static int getRandomIntNumber(int len) {
+        Random randomObject = new Random();
+        int nextRandom = randomObject.nextInt(len);
+        return nextRandom;
+    }
 
     /**
-     * Method to generate a random number using current time in milliseconds
-     * @return
+     * Method to generate a Random Number in Milliseconds
+     *
+     * @return long
      */
-    public static long getRandomNumberAsMilliSeconds( ) {
+    public static long getRandomNumberAsMilliSeconds() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return System.currentTimeMillis();
     }
 
-
     /**
-     * Method to generate a random string in milliseconds
-     * @return
+     * Method to generate a Random Number in Milliseconds
+     *
+     * @return String
      */
-    public static String getRandomSringAsMilliSeconds( ) {
+    public static String getRandomNumberStringAsMilliSeconds() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         long random = System.currentTimeMillis();
-
         return Long.toString(random);
-
     }
 
     /**
-     * generates RandomFirstName
+     * Method to generate a Random Number according to Digit Length
+     *
+     * @return
+     */
+    public static int getRandomStringOfLen(int numberOfDigits) {
+        int m = (int) Math.pow(10, numberOfDigits - 1);
+        return m + new Random().nextInt(9 * m);
+    }
+
+    /**
+     * Method to generate a Random First Name
+     *
      * @return
      */
     public static String getRandomFirstName() {
-
-        return "TestUserF"+getRandomNumberAsMilliSeconds();
+        return "TestUserF" + getRandomNumberAsMilliSeconds();
     }
 
     /**
-     * generates Date
+     * Method to generate a Random Date
+     *
      * @return
      */
     public static String getDate() {
-
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat(Constants.DATE_FORMAT);
-        return format.format(date);
+        String pattern;
+        SimpleDateFormat format = new SimpleDateFormat(pattern = "MM/DD/YYYY");
+        format.format(date);
+        return date.toString();
     }
 
     /**
-     * generates Date in specified format
-     * @param strFormat
+     * Method to generate a Random SSN
+     *
      * @return
      */
-    public static String getDate(String strFormat) {
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(strFormat);
-        return dateFormat.format(date);
+    public static String generateRandomSSN() {
+        int num1, num2, num3; // 3 numbers in area code
+        int groupNumber, serialNumber; // sequence 2 and 3 of the phone number
+
+        Random generator = new Random();
+
+        // Area code number
+        num1 = generator.nextInt(9) + 1; // adding 1 so there is no 0 to begin
+        num2 = generator.nextInt(10);
+        num3 = generator.nextInt(10);
+
+        // generating the group number in ssn number
+        groupNumber = generator.nextInt(89) + 10;
+
+        // generating the serial number in ssn number
+        serialNumber = generator.nextInt(8999) + 1000;
+
+        String randomSSNNumber = "(" + num1 + num2 + num3 + ")" + "-" + groupNumber + "-" + serialNumber;
+        return randomSSNNumber;
     }
 
     /**
-     * generates RandomSSN
-	 * @return
-	 */
-	public static String generateRandomSSN() {
+     * Method to generate a Random Phone Number
+     *
+     * @return
+     */
+    public static String generateRandomPhoneNumber() {
+        int num1, num2, num3; // 3 numbers in area code
+        int set2, set3; // sequence 2 and 3 of the phone number
 
-		return getRandomStringOfLen(3) + "-" + getRandomStringOfLen(2) + "-" + getRandomStringOfLen(4);
-	}
+        Random generator = new Random();
 
-	/**
-	 * generates RandomPhoneNumber
-	 * @return
-	 */
-	public static String generateRandomPhoneNo() {
+        // Area code number
+        num1 = generator.nextInt(9) + 1; // adding 1 so there is no 0 to begin
+        num2 = generator.nextInt(10);
+        num3 = generator.nextInt(10);
 
-		return "(" + getRandomStringOfLen(3) + ")" + getRandomStringOfLen(3) + "-"
-				+ getRandomStringOfLen(4);
-	}
+        // Sequence two of phone number
+        set2 = generator.nextInt(899) + 100;
+
+        // Sequence 3 of number
+        set3 = generator.nextInt(8999) + 1000;
+
+        String randomPhoneNumber = "(" + num1 + num2 + num3 + ")" + " " + set2 + "-" + set3;
+        return randomPhoneNumber;
+    }
+
 }
