@@ -72,7 +72,7 @@ public class BayampMailBoxFunctionalityTests {
      *
      * @throws InterruptedException
      */
-    @Test 
+    @Test
     public void inboxMailTest() throws InterruptedException {
 
         driver.get(APP_URL);
