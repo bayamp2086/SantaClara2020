@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class BayampMessageToolBarTests {
+public class BayampMailBoxFunctionalityTests {
 
 
     private static final String APP_URL = "http://webmail.bayamp.com";
@@ -18,12 +18,14 @@ public class BayampMessageToolBarTests {
     private WebElement userField;
     private WebElement passwordField;
     private WebElement composeField;
+    private WebElement inboxField;
+    private WebElement mailfield;
+    private WebElement replyField;
     private WebElement submitButton;
 
     @BeforeClass
     public void setUpDriver() {
         driver = new ChromeDriver();
-
     }
 
     @AfterClass
@@ -32,7 +34,12 @@ public class BayampMessageToolBarTests {
         driver.close();
     }
 
-    @Test //rcmbtn107,_from
+    /**
+     * Checks whether when compose is clicked it goes to compose mail window and user email is under from drop down
+     *
+     * @throws InterruptedException
+     */
+    @Test
     public void composeMailTest() throws InterruptedException {
 
         String expectedUserEmail = "user1@bayamp.com";
@@ -58,6 +65,38 @@ public class BayampMessageToolBarTests {
 
         Assert.assertEquals(actualUserEmail, expectedUserEmail);
 
+    }
+
+    /**
+     * Checks whether when mail in Inbox is clicked the reply button is be enabled
+     *
+     * @throws InterruptedException
+     */
+    @Test 
+    public void inboxMailTest() throws InterruptedException {
+
+        driver.get(APP_URL);
+        userField = driver.findElement(By.id("user"));
+        passwordField = driver.findElement(By.id("pass"));
+        submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
+
+        userField.clear();
+        userField.sendKeys("user1@bayamp.com");
+        passwordField.sendKeys("user1");
+        submitButton.click();
+
+        //Switch driver to frame to access the inbox field
+        driver.switchTo().frame(driver.findElement(By.id("mailFrame")));
+        inboxField = driver.findElement(By.id("rcmliSU5CT1g"));
+
+        inboxField.click();
+        Thread.sleep(1000);
+        mailfield = driver.findElement(By.id("rcmrowNw"));
+        mailfield.click();
+        replyField = driver.findElement(By.id("rcmbtn108"));
+        boolean isEnabled = replyField.getAttribute("aria-disabled").equals("false");
+
+        Assert.assertTrue(isEnabled, "The reply field is not enabled when mail in Inbox is clicked");
     }
 
 }
