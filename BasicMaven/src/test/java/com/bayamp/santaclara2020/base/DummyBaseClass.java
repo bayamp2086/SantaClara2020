@@ -1,4 +1,4 @@
-package com.bayamp.base;
+package com.bayamp.santaclara2020.base;
 
 import com.bayamp.santaclara2020.generic.Constants;
 import org.testng.Reporter;

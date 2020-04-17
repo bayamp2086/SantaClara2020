@@ -1,4 +1,4 @@
-package com.bayamp.base;
+package com.bayamp.santaclara2020.base;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
