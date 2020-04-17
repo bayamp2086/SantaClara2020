@@ -1,7 +1,6 @@
 package com.bayamp.santaclara2020.apitests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,7 +32,12 @@ public class BayampLoginTests {
         driver.close();
     }
 
-    @Test // lblUserNameTxt , lblLogout
+    /**
+     * Method checks whether the page logs in when valid username and password is entered
+     *
+     * @throws InterruptedException
+     */
+    @Test
     public void positiveLoginTest() throws InterruptedException {
 
         String expectedUserEmail = "user1@bayamp.com";
@@ -66,6 +70,11 @@ public class BayampLoginTests {
 
     }
 
+    /**
+     * Method checks whether an empty username field prompts a message to enter username
+     *
+     * @throws InterruptedException
+     */
     @Test
     public void negativeLoginTest() throws InterruptedException {
         driver.get(APP_URL);
@@ -83,6 +92,9 @@ public class BayampLoginTests {
         Assert.assertEquals(valueOfTheMessage, expectedValidation);
     }
 
+    /**
+     * Method checks whether the password field is masked
+     */
    @Test
     public void maskedPasswordTest() {
         driver.get(APP_URL);
@@ -93,6 +105,11 @@ public class BayampLoginTests {
         Assert.assertTrue(isMasked, "The password field is not masked");
     }
 
+    /**
+     * Method checks whether upper case entry in username field is not treated as invalid.
+     *
+     * @throws InterruptedException
+     */
     @Test
     public void upperCaseLoginTest() throws InterruptedException {
 
