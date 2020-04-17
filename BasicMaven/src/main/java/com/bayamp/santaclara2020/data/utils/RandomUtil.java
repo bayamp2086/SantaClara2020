@@ -1,4 +1,4 @@
-package com.bayamp.santaclara2020.utils;
+package com.bayamp.santaclara2020.data.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
