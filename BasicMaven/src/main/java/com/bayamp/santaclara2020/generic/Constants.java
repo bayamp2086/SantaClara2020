@@ -1,9 +1,9 @@
 package com.bayamp.santaclara2020.generic;
 
 public class Constants {
-    public static final String CONFIG_FILE_PATH = "src/test/resources/config.properties";
-    public static final String UI_CONFIG_FILE_PATH = "src/test/resources/uiconfig.properties";
-    public static final String API_CONFIG_FILE_PATH = "src/test/resources/apiconfig.properties";
+    public static final String CONFIG_FILE_PATH = "src/test/resources/data/config.properties";
+    public static final String UI_CONFIG_FILE_PATH = "src/test/resources/data/uiconfig.properties";
+    public static final String API_CONFIG_FILE_PATH = "src/test/resources/data/apiconfig.properties";
 
     public static final String TEST_DATA_FOLDER_LOCATION = "src/main/resources/data/address.csv";
     public static final String RELATIVE_FILE_PATH = "src/main/resources/data/myfile.txt";
