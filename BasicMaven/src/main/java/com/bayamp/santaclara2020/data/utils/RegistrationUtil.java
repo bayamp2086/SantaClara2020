@@ -1,5 +1,6 @@
-package com.bayamp.santaclara2020.utils;
+package com.bayamp.santaclara2020.data.utils;
 
+import com.bayamp.santaclara2020.generic.Constants;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class RegistrationUtil {
