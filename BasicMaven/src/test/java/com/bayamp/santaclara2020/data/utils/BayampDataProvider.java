@@ -1,4 +1,4 @@
-package com.bayamp.utils;
+package com.bayamp.santaclara2020.data.utils;
 
 import com.opencsv.CSVReader;
 import org.json.simple.JSONArray;
@@ -22,17 +22,24 @@ import java.io.IOException;
 import java.util.*;
 
 public class BayampDataProvider {
-    private final static String CSV_FILE_PATH = "src/test/resources/palindrome.csv";
-    private final static String BOOK_CSV_FILE_PATH = "src/test/resources/book-details.csv";
-    private final static String MAP_CSV_FILE_PATH = "src/test/resources/test-data.csv";
-    private final static String REGISTRATION_XML_FILE_PATH = "src/test/resources/registration-details.xml";
-    private final static String STUDENT_JSON_FILE_PATH = "src/test/resources/student-details.json";
+    private final static String CSV_FILE_PATH = "src/test/resources/data/palindrome.csv";
+    private final static String BOOK_CSV_FILE_PATH = "src/test/resources/data/book-details.csv";
+    private final static String MAP_CSV_FILE_PATH = "src/test/resources/data/test-data.csv";
+    private final static String REGISTRATION_XML_FILE_PATH = "src/test/resources/data/registration-details.xml";
+    private final static String STUDENT_JSON_FILE_PATH = "src/test/resources/data/student-details.json";
 
     private static String line = "";
     private static String cvsSplitBy = ",";
     private static BufferedReader br;
     private static CSVReader reader = null;
 
+    /**
+     * Method retrieves data from palindrome csv file and creates a map object
+     *
+     * @return Two dimensional array object
+     *
+     * @throws IOException
+     */
     @DataProvider(name = "getCSVData")
     public static Object[][] parseCSVFileToGetData() throws IOException {
 
@@ -61,26 +68,13 @@ public class BayampDataProvider {
         return myData;
     }
 
-    /*
-     * @DataProvider(name = "getMapCSVData") public static Object[][]
-     * parseCSVFileToGetMapData() throws IOException {
+    /**
+     * Method retrieves data from book-details csv file and creates a book object
      *
-     * Object[][] myData = new Object[3][1]; String[] values = null;
+     * @return Two dimensional array object
      *
-     * br = new BufferedReader(new FileReader("src/test/resources/TestData.csv"));
-     *
-     * // getting keys line = br.readLine(); String[] keys = line.split(cvsSplitBy);
-     *
-     * // getting values for (int i = 0; i < myData.length; i++) { line =
-     * br.readLine(); values = line.split("\"(,\")?");
-     * System.out.println(values.length); Map<String, String> row = new
-     * HashMap<String, String>(); // creating a map object for every row for (int j
-     * = 0; j < values.length; j++) { row.put(keys[j], values[j]);
-     *
-     * } myData[i][0] = row; } System.out.println(Arrays.deepToString(myData));
-     * return myData; }
+     * @throws IOException
      */
-
     @DataProvider(name = "getBookCSVData")
     public static Object[][] parseCSVFileToGetBookData() throws IOException {
         String[] values = null;
@@ -103,6 +97,15 @@ public class BayampDataProvider {
         return books;
     }
 
+    /**
+     * Method retrieves data from registration-details xml file and creates a student object
+     *
+     * @return Two dimensional array object
+     *
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     @DataProvider(name = "getXMLData")
     public static Object[][] parseXMLFileToGetData() throws ParserConfigurationException, IOException, SAXException {
         Object[][] students = new Object[3][1];
@@ -139,6 +142,14 @@ public class BayampDataProvider {
 
     }
 
+    /**
+     * Method retrieves data from student-details xml file and creates a student object
+     *
+     * @return Two dimensional array object
+     *
+     * @throws IOException
+     * @throws ParseException
+     */
     @DataProvider(name = "getJSONData")
     public Object[][] parseJSONFileToGetData() throws IOException, ParseException {
         Object[][] students = new Object[3][1];
@@ -164,6 +175,14 @@ public class BayampDataProvider {
         return students;
     }
 
+    /**
+     * Method retrieves data from palindrome csv file and add it to List
+     *
+     * @return Iterator object array
+     *
+     * @throws InterruptedException
+     * @throws IOException
+     */
     @DataProvider(name = "provideData")
     public Iterator<Object[]> provider() throws InterruptedException, IOException {
 
@@ -180,6 +199,26 @@ public class BayampDataProvider {
 
         return myList.iterator();
     }
+
+    /*
+     * @DataProvider(name = "getMapCSVData") public static Object[][]
+     * parseCSVFileToGetMapData() throws IOException {
+     *
+     * Object[][] myData = new Object[3][1]; String[] values = null;
+     *
+     * br = new BufferedReader(new FileReader("src/test/resources/TestData.csv"));
+     *
+     * // getting keys line = br.readLine(); String[] keys = line.split(cvsSplitBy);
+     *
+     * // getting values for (int i = 0; i < myData.length; i++) { line =
+     * br.readLine(); values = line.split("\"(,\")?");
+     * System.out.println(values.length); Map<String, String> row = new
+     * HashMap<String, String>(); // creating a map object for every row for (int j
+     * = 0; j < values.length; j++) { row.put(keys[j], values[j]);
+     *
+     * } myData[i][0] = row; } System.out.println(Arrays.deepToString(myData));
+     * return myData; }
+     */
 
 }
 
