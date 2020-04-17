@@ -35,7 +35,7 @@ public class BayampMailBoxFunctionalityTests {
     }
 
     /**
-     * Checks whether when compose is clicked it goes to compose mail window and user email is under from drop down
+     * Method checks whether when compose is clicked it goes to compose mail window and user email is visible from drop down
      *
      * @throws InterruptedException
      */
@@ -58,7 +58,7 @@ public class BayampMailBoxFunctionalityTests {
         composeField = driver.findElement(By.id("rcmbtn107")); // xpath("//*[@id=\"messagetoolbar\"]/a[@id=\"rcmbtn107\"]"
         composeField.click();
 
-        //select to find the element from dropdown
+        //select to find the user email from dropdown
         Select select = new Select(driver.findElement(By.id("_from")));
         WebElement option = select.getFirstSelectedOption();
         String actualUserEmail = option.getText();
@@ -68,7 +68,7 @@ public class BayampMailBoxFunctionalityTests {
     }
 
     /**
-     * Checks whether when mail in Inbox is clicked the reply button is be enabled
+     * Method checks whether when mail in Inbox is clicked the reply field is enabled
      *
      * @throws InterruptedException
      */
