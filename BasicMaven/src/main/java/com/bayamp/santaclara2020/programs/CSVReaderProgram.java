@@ -1,4 +1,4 @@
-package com.bayamp.santaclara2020.generic;
+package com.bayamp.santaclara2020.programs;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
