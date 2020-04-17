@@ -1,14 +1,10 @@
-package com.bayamp.santaclara2020.generic;
+package com.bayamp.santaclara2020.programs;
 
 import com.bayamp.santaclara2020.data.utils.RandomUtil;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * @author swatipathak
- *
- */
 public class RandomProgram {
 
     public static void main(String[] args) {
