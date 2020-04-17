@@ -1,0 +1,11 @@
+<students>
+    <student>
+        <firstName>Emily</firstName> <lastName>Joy</lastName> <userName>Emily@123</userName> <pwd>asdfgh</pwd>
+    </student>
+    <student>
+        <firstName>Pari</firstName> <lastName>Pramod</lastName> <userName>Pari@273</userName> <pwd>qwerty</pwd>
+    </student>
+    <student>
+        <firstName>Pehel</firstName> <lastName>Deepak</lastName> <userName>Pehel@223</userName> <pwd>zxcvb</pwd>
+    </student>
+</students>

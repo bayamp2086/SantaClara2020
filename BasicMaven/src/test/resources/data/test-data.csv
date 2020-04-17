@@ -1,0 +1,44 @@
+TestID,TestDescription,TestType,HttpMethod,EndPoint,InputJson,ExpectedJSON
+1,Get Request,Positive,GET,/services/1.0/bayamp/employees,,"[
+{
+
+ ""name"":""james"",
+ ""id"":100
+},
+
+{
+
+ ""name"":""frank"",
+ ""id"":101
+},
+
+{
+
+ ""name"":""bruce"",
+ ""id"":102
+}
+
+]"
+2,Get Request,Negative,GET,/services/1.0/bayamp/employees/210,,"{
+ ""error"":404
+}"
+3,Post Request,Positive,POST,/services/1.0/bayamp/register/employees,,"[
+{
+
+ ""name"":""james"",
+ ""id"":10
+},
+
+{
+
+ ""name"":""frank"",
+ ""id"":11
+},
+
+{
+
+ ""name"":""bruce"",
+ ""id"":12
+}
+
+]"

@@ -1,0 +1,4 @@
+input,expected
+bayamp,false
+madam,true
+null,Input String cannot be null
