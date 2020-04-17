@@ -1,8 +1,9 @@
-package com.bayamp.bayamplib.utils.stringutils.tests;
+package com.bayamp.santaclara2020.utils.stringutils.tests;
 
-import com.bayamp.base.BaseClass;
-import com.bayamp.utils.Book;
-import com.bayamp.utils.Student;
+import com.bayamp.santaclara2020.base.BaseClass;
+import com.bayamp.santaclara2020.data.utils.BayampDataProvider;
+import com.bayamp.santaclara2020.data.utils.Book;
+import com.bayamp.santaclara2020.data.utils.Student;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
@@ -19,19 +20,19 @@ public class StringUtilTests extends BaseClass {
      * }
      */
 
-    @Test(dataProvider = "getBookCSVData", dataProviderClass = com.bayamp.utils.BayampDataProvider.class)
+    @Test(dataProvider = "getBookCSVData", dataProviderClass = BayampDataProvider.class)
     public void bookTest(Book b1) {
 
         Reporter.log(b1.getString(), true);
     }
 
-    @Test(dataProvider = "getXMLData", dataProviderClass = com.bayamp.utils.BayampDataProvider.class)
+    @Test(dataProvider = "getXMLData", dataProviderClass = BayampDataProvider.class)
     public void registration(Student student) {
 
         Reporter.log(student.getString(), true);
     }
 
-    @Test(dataProvider = "getJSONData", dataProviderClass = com.bayamp.utils.BayampDataProvider.class)
+    @Test(dataProvider = "getJSONData", dataProviderClass = BayampDataProvider.class)
     public void studentDetails(Student student) {
 
         Reporter.log(student.toString(), true);
