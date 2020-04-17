@@ -1,7 +1,7 @@
-package com.bayamp.bayamplib.utils.arrayutils.tests;
+package com.bayamp.santaclara2020.utils.arrayutils.tests;
 
-import com.bayamp.base.BaseClass;
-import com.bayamp.santaclara2020.utils.ArrayUtils;
+import com.bayamp.santaclara2020.base.BaseClass;
+import com.bayamp.santaclara2020.data.utils.ArrayUtils;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
