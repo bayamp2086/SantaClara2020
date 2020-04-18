@@ -89,7 +89,9 @@ public class BayampLoginTests {
         WebElement errorMessageWebElement = driver.findElement(divElement);
         String valueOfTheMessage = errorMessageWebElement.getText();
 
+        Reporter.log("Perform Validations");
         Assert.assertEquals(valueOfTheMessage, expectedValidation);
+        Reporter.log("Validations Complete");
     }
 
     /**
@@ -102,7 +104,9 @@ public class BayampLoginTests {
 
         boolean isMasked = passwordField.getAttribute("type").equals("password");
 
+        Reporter.log("Perform Validations");
         Assert.assertTrue(isMasked, "The password field is not masked");
+        Reporter.log("Validations Complete");
     }
 
     /**
@@ -133,8 +137,11 @@ public class BayampLoginTests {
         String actualUserEmail = driver.findElement(By.id("lblUserNameTxt")).getText();
         String actualLogOutText = driver.findElement(By.id("lblLogout")).getText();
 
+        Reporter.log("Perform Validations");
         Assert.assertEquals(actualUserEmail, expectedUserEmail);
         Assert.assertEquals(actualLogOutText, expectedLogOutText);
+        Reporter.log("Validations Complete");
+
     }
 }
 
