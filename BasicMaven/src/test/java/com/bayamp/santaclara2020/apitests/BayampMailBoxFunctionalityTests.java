@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -63,8 +64,9 @@ public class BayampMailBoxFunctionalityTests {
         WebElement option = select.getFirstSelectedOption();
         String actualUserEmail = option.getText();
 
+        Reporter.log("Perform Validations");
         Assert.assertEquals(actualUserEmail, expectedUserEmail);
-
+        Reporter.log("Validations Complete");
     }
 
     /**
@@ -90,13 +92,15 @@ public class BayampMailBoxFunctionalityTests {
         inboxField = driver.findElement(By.id("rcmliSU5CT1g"));
 
         inboxField.click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         mailfield = driver.findElement(By.id("rcmrowNw"));
         mailfield.click();
         replyField = driver.findElement(By.id("rcmbtn108"));
         boolean isEnabled = replyField.getAttribute("aria-disabled").equals("false");
 
+        Reporter.log("Perform Validations");
         Assert.assertTrue(isEnabled, "The reply field is not enabled when mail in Inbox is clicked");
+        Reporter.log("Validations Complete");
     }
 
 }
