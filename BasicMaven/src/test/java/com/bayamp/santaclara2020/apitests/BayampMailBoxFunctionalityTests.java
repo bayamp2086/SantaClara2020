@@ -11,6 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class BayampMailBoxFunctionalityTests {
 
 
@@ -92,7 +94,8 @@ public class BayampMailBoxFunctionalityTests {
         inboxField = driver.findElement(By.id("rcmliSU5CT1g"));
 
         inboxField.click();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        //Thread.sleep(3000);
         mailfield = driver.findElement(By.id("rcmrowNw"));
         mailfield.click();
         replyField = driver.findElement(By.id("rcmbtn108"));
