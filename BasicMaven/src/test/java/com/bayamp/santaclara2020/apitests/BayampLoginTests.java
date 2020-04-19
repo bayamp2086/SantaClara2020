@@ -12,6 +12,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 //@Test
 public class BayampLoginTests {
 
@@ -84,7 +86,7 @@ public class BayampLoginTests {
         submitButton.click();
 
         String expectedValidation = "You must specify a username to log in.";
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         By divElement = By.id("login-status-message");
         WebElement errorMessageWebElement = driver.findElement(divElement);
         String valueOfTheMessage = errorMessageWebElement.getText();
