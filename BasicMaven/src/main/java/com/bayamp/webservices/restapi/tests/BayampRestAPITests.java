@@ -11,7 +11,6 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -30,73 +29,92 @@ import java.util.List;
 
 public class BayampRestAPITests {
 
-    private static HttpClient client = new DefaultHttpClient();;
-
-    /*@BeforeClass
-    public void setUpHttpClient() {
-        client = new DefaultHttpClient();
-
-    }*/
+    private static HttpClient client = new DefaultHttpClient();
+    private static HttpPut putRequest;
+    private static HttpGet getRequest;
+    private static HttpDelete deleteRequest;
+    private static HttpPost postRequest;
+    private static List<NameValuePair> params = new ArrayList<NameValuePair>();
+    private static HttpResponse responseObject;
+    private static StatusLine responseStatusLine;
+    private static int responseStatusCode;
+    private static String responseStatusMessage;
+    private static HttpEntity entityContent;
+    private static JSONParser jsonParser = new JSONParser();
 
     /**
-     * Method updates the engineer's name field to value entered
+     * Method that returns status code, status message and entity content
      *
      * @throws IOException
      */
     @Test
-    public static String putEngineerPositiveTest(String engineerId) throws IOException {
+    public static ResponseObject statusCodeMessageAndContent(HttpResponse responseObject){
+        responseStatusLine = responseObject.getStatusLine();
+        responseStatusCode = responseStatusLine.getStatusCode();
+        responseStatusMessage = responseStatusLine.getReasonPhrase();
+        entityContent = responseObject.getEntity();
 
-        HttpPut putRequest = new HttpPut(RestApiLocators.PUT_ENDPOINT + engineerId);
+        return new ResponseObject(responseStatusCode, responseStatusMessage, entityContent);
+    }
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
+    /**
+     * Method updates the engineer's name field to value entered using PUT request
+     *
+     * @throws IOException
+     */
+    @Test
+    public static HttpEntity putEngineerPositiveTest(String engineerId) throws IOException {
+
+        putRequest = new HttpPut(RestApiLocators.PUT_ENDPOINT + engineerId);
+
         params.add(new BasicNameValuePair("name", "PUT-Java"));
         putRequest.setEntity(new UrlEncodedFormEntity(params));
-        HttpResponse responseObject = client.execute(putRequest);
+        responseObject = client.execute(putRequest);
 
-        StatusLine responseStatusLine = responseObject.getStatusLine();
-        int responseStatusCode = responseStatusLine.getStatusCode();
-        String responseStatusMessage = responseStatusLine.getReasonPhrase();
+        statusCodeMessageAndContent(responseObject);
 
         Reporter.log("Perform Validations");
         Assert.assertEquals(200,responseStatusCode);
         Assert.assertEquals("OK",responseStatusMessage);
         Reporter.log("Validations Complete");
 
-        HttpEntity entityContent = responseObject.getEntity();
-        String responseContentAsString = EntityUtils.toString(entityContent);
-        return responseContentAsString;
-        //System.out.println(responseContentAsString);
+        return entityContent;
     }
 
     /**
-     * Method gets all the engineers and calls the deleteEngineerPositiveTest method with a specific id
+     * Method gets all the engineers
      *
      * @throws IOException,ParseException,URISyntaxException
      */
     @Test
-    public static String getAnEngineerFromAllEngineersPositiveTest() throws IOException, ParseException, URISyntaxException {
+    public static HttpEntity getAllEngineersPositiveTest() throws IOException, ParseException, URISyntaxException {
 
-        HttpGet getRequest = new HttpGet(RestApiLocators.GET_ENDPOINT);
-        HttpResponse getResponseObject = client.execute(getRequest);
+        getRequest = new HttpGet(RestApiLocators.GET_ENDPOINT);
+        responseObject = client.execute(getRequest);
 
-        StatusLine responseStatusLine = getResponseObject.getStatusLine();
-        int responseStatusCode = responseStatusLine.getStatusCode();
-        String responseStatusMessage = responseStatusLine.getReasonPhrase();
+        statusCodeMessageAndContent(responseObject);
 
         Reporter.log("Perform Validations");
         Assert.assertEquals(200,responseStatusCode);
         Assert.assertEquals("OK",responseStatusMessage);
         Reporter.log("Validations Complete");
 
-        HttpEntity entityContent = getResponseObject.getEntity();
-        String jsonContentAsString = EntityUtils.toString(entityContent);
+        return entityContent;
+    }
 
-        JSONParser jsonParser = new JSONParser();
+    /**
+     * Method gets an engineer from engineers list
+     *
+     * @throws IOException,ParseException,URISyntaxException
+     */
+    public static JSONObject getAnEngineerFromAllEngineersPositiveTest(HttpEntity jsonContent) throws ParseException, IOException {
+
+        String jsonContentAsString = EntityUtils.toString(jsonContent);
+
         Object jsonObj = jsonParser.parse(jsonContentAsString);
         JSONArray arrayObj = (JSONArray) jsonObj;
         JSONObject obj = (JSONObject) arrayObj.get(0);
-        String id = (String) obj.get("id");
-        return id;
+        return obj;
     }
 
     /**
@@ -105,54 +123,60 @@ public class BayampRestAPITests {
      * @throws IOException,URISyntaxException
      */
     @Test
-    public static String deleteEngineerPositiveTest(String engineerId) throws IOException, URISyntaxException {
+    public static HttpEntity deleteEngineerPositiveTest(JSONObject obj) throws IOException, URISyntaxException {
 
-        URIBuilder uriBuilder = new URIBuilder(RestApiLocators.BASE_URI);
+        String engineerId = (String) obj.get("id");
+
+        /*URIBuilder uriBuilder = new URIBuilder(RestApiLocators.BASE_URI);
         uriBuilder.setPath("/bayamp/delete/" + engineerId);
         String generatedUri = uriBuilder.toString();
-        //System.out.println(generatedUri);
-        HttpDelete deleteRequest = new HttpDelete(generatedUri);
-        HttpResponse responseObject = client.execute(deleteRequest);
+        System.out.println(generatedUri);*/
 
-        StatusLine responseStatusLine = responseObject.getStatusLine();
-        int responseStatusCode = responseStatusLine.getStatusCode();
-        String responseStatusMessage = responseStatusLine.getReasonPhrase();
+        deleteRequest = new HttpDelete(RestApiLocators.DELETE_ENDPOINT + engineerId);
+        responseObject = client.execute(deleteRequest);
+
+        statusCodeMessageAndContent(responseObject);
 
         Reporter.log("Perform Validations");
         Assert.assertEquals(200,responseStatusCode);
         Assert.assertEquals("OK",responseStatusMessage);
         Reporter.log("Validations Complete");
 
-        HttpEntity entityContent = responseObject.getEntity();
-        String responseContentAsString = EntityUtils.toString(entityContent);
-        return responseContentAsString;
+        return entityContent;
     }
 
     /**
-     * Method creates a new resource (an engineer) and calls the getEngineerTest method with a created id
+     * Method creates a new resource (an engineer)
      *
      * @throws IOException,URISyntaxException
      */
     @Test
-    public static String PostEngineerWithIdPositiveTest() throws IOException, URISyntaxException {
+    public static HttpEntity postEngineerPositiveTest() throws IOException, URISyntaxException {
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("name", "Bayamp"));
-        HttpPost postRequest = new HttpPost(RestApiLocators.POST_ENDPOINT);
+        postRequest = new HttpPost(RestApiLocators.POST_ENDPOINT);
         postRequest.setEntity(new UrlEncodedFormEntity(params));
-        HttpResponse responseObject = client.execute(postRequest);
+        responseObject = client.execute(postRequest);
 
-        StatusLine responseStatusLine = responseObject.getStatusLine();
-        int responseStatusCode = responseStatusLine.getStatusCode();
-        String responseStatusMessage = responseStatusLine.getReasonPhrase();
+        statusCodeMessageAndContent(responseObject);
 
         Reporter.log("Perform Validations");
         Assert.assertEquals(201,responseStatusCode);
         Assert.assertEquals("Created",responseStatusMessage);
         Reporter.log("Validations Complete");
 
-        HttpEntity entityContent = responseObject.getEntity();
+        return entityContent;
+    }
+
+    /**
+     * Method gets the id of the new engineer created using POST request
+     *
+     * @throws IOException,URISyntaxException
+     */
+    public static String postEngineerIdPositiveTest(HttpEntity entityContent) throws IOException {
+
         String responseContentAsString = EntityUtils.toString(entityContent);
+
         String[] messageArray = responseContentAsString.split(" ");
         String engineerId = messageArray[5];
         return engineerId;
@@ -164,23 +188,18 @@ public class BayampRestAPITests {
      * @throws IOException,URISyntaxException
      */
     @Test
-    public static String getEngineerPositiveTest(String engineerId) throws IOException, URISyntaxException {
+    public static HttpEntity getEngineerPositiveTest(String engineerId) throws IOException, URISyntaxException {
 
-        HttpGet getRequest = new HttpGet(RestApiLocators.GET_ENDPOINT + "/" + engineerId);
-        HttpResponse responseObject = client.execute(getRequest);
+        getRequest = new HttpGet(RestApiLocators.GET_ENDPOINT + "/" + engineerId);
+        responseObject = client.execute(getRequest);
 
-        StatusLine responseStatusLine = responseObject.getStatusLine();
-        int responseStatusCode = responseStatusLine.getStatusCode();
-        String responseStatusMessage = responseStatusLine.getReasonPhrase();
+        statusCodeMessageAndContent(responseObject);
 
         Reporter.log("Perform Validations");
         Assert.assertEquals(200,responseStatusCode);
         Assert.assertEquals("OK",responseStatusMessage);
         Reporter.log("Validations Complete");
 
-        HttpEntity entityContent = responseObject.getEntity();
-        String responseContentAsString = EntityUtils.toString(entityContent);
-        return responseContentAsString;
+        return entityContent;
     }
-
 }
