@@ -26,15 +26,15 @@ public class LoginTests extends BaseWebUI {
 
        userName = getUserName();
        password = getPassword();
-        LandingPage landingPage = loginPage.login(userName,password);
-        Assert.assertTrue(landingPage.isLogOutElementPresent());
+       LandingPage landingPage = loginPage.loginSuccessful(userName,password);
+       Assert.assertTrue(landingPage.isLogOutElementPresent());
 
     }
 
     @Test
     public void loginNegativeTest() throws Exception {
 
-        LandingPage landingPage = loginPage.login("dfff","");
+        LandingPage landingPage = loginPage.loginSuccessful("dfff","");
         Assert.assertFalse(landingPage.isLogOutElementPresent());
 
     }
