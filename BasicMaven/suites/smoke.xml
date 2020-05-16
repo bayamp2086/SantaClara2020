@@ -1,8 +1,8 @@
-<suite name="suite1">
+<suite name="Web Tests Runner">
 
-    <test name = "string-tests">
+    <test name = "smoketest">
       <classes>
-        <class name = "com.bayamp.pleasanton2020.utils.stringutils.tests.StringUtilsTests" />
+        <class name = "com.bayamp.cucumber.testng.TestNGCucuRunner" />
       </classes>
     </test>
 
