@@ -16,10 +16,10 @@ public class BayampRestAssuredClient {
 
         //getting an engineer information with his id
         Response responseAnEngineer = BayampRestAssuredTests.getEngineerWithIdResource("EJJIAzxcd");
-        String anEngineer = responseAllEngineers.getBody().asString();
+        String anEngineer = responseAnEngineer.getBody().asString();
         System.out.println(anEngineer);
 
-        //get newly created engineer id from POST request
+        //creating an engineer from POST request
         Response responseCreateEngineer = BayampRestAssuredTests.createEngineerResource();
         String createEngineer = responseCreateEngineer.getBody().asString();
         System.out.println(createEngineer);
