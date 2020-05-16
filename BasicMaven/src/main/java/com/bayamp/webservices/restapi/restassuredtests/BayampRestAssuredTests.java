@@ -34,7 +34,7 @@ public class BayampRestAssuredTests {
     @Test
     public static Response updateEngineerResource(String engineerId) {
         JSONObject jsonObj = new JSONObject();
-        jsonObj.put("name", "RestAssuredPut");
+        jsonObj.put("name", "RestAssuredPut1");
 
         return given()
                 .contentType("application/json")
