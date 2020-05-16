@@ -22,12 +22,12 @@ public class RestAssuredTestsStepDefinition {
     //To get an engineer with id
     @Given("GET \"(.*)\" to get an engineer")
     public void getAnEngineerId(String engineerId) {
-        request = given().pathParam("id", engineerId);
+        request = given().pathParam("engineerId", engineerId);
     }
     @When("I execute the GET request")
     public void getAnEngineer() {
         // response = request.when().get("https://bayamprestapp.herokuapp.com/bayamp/engineers/{id}");
-        response = request.when().get(RestApiLocators.GET_ENDPOINT + "/{id}");
+        response = request.when().get(RestApiLocators.GET_ENDPOINT + "/{engineerId}");
     }
     @Then("I get 200 OK status code for GET request")
     public void validateGetStatusCode() {
@@ -42,10 +42,10 @@ public class RestAssuredTestsStepDefinition {
     }
 
     //To create an engineer
-    @Given("POST data to create an engineer")
-    public void createAnEngineerData(){
+    @Given("POST \"(.*)\" to create an engineer")
+    public void createAnEngineerData(String name){
         JSONObject jsonObj = new JSONObject();
-        jsonObj.put("name", "RestAssuredPost");
+        jsonObj.put("name", name);
         request = given().body(jsonObj.toString());
     }
     @When("I execute the POST request")
@@ -61,15 +61,15 @@ public class RestAssuredTestsStepDefinition {
     }
 
     //To update an engineer
-    @Given("PUT data and \"(.*)\" to update an engineer")
-    public void updateAnEngineerIdAndData(String engineerId){
+    @Given("PUT \"(.*)\" and \"(.*)\" to update an engineer")
+    public void updateAnEngineerIdAndData(String name, String engineerId){
         JSONObject jsonObj = new JSONObject();
-        jsonObj.put("name", "RestAssuredPut");
-        request = given().pathParam("id", engineerId).body(jsonObj.toString());
+        jsonObj.put("name", name);
+        request = given().pathParam("engineerId", engineerId).body(jsonObj.toString());
     }
     @When("I execute the PUT request")
     public void updateAnEngineer(){
-        response = request.when().request("PUT", RestApiLocators.PUT_ENDPOINT + "{id}");
+        response = request.when().request("PUT", RestApiLocators.PUT_ENDPOINT + "{engineerId}");
     }
     @Then("I get 200 Ok status code for PUT request")
     public void validatePutStatusCode(){
@@ -82,11 +82,11 @@ public class RestAssuredTestsStepDefinition {
     //To delete an engineer
     @Given("DELETE \"(.*)\" to delete an engineer")
     public void deleteAnEngineerId(String engineerId){
-        request = given().pathParam("id", engineerId);
+        request = given().pathParam("engineerId", engineerId);
     }
     @When("I execute the DELETE request")
     public void deleteAnEngineer(){
-        response = request.when().request("DELETE", RestApiLocators.DELETE_ENDPOINT + "{id}");
+        response = request.when().request("DELETE", RestApiLocators.DELETE_ENDPOINT + "{engineerId}");
     }
     @Then("I get 200 Ok status code for DELETE request")
     public void validateDeleteStatusCode(){
