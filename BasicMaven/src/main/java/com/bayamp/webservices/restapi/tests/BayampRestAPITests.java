@@ -173,6 +173,7 @@ public class BayampRestAPITests {
      *
      * @throws IOException,URISyntaxException
      */
+    @Test
     public static String postEngineerIdPositiveTest(HttpEntity entityContent) throws IOException {
 
         String responseContentAsString = EntityUtils.toString(entityContent);
