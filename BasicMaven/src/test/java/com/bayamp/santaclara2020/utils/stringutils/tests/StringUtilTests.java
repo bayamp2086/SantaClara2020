@@ -2,8 +2,8 @@ package com.bayamp.santaclara2020.utils.stringutils.tests;
 
 import com.bayamp.santaclara2020.base.BaseClass;
 import com.bayamp.santaclara2020.data.utils.BayampDataProvider;
-import com.bayamp.santaclara2020.data.utils.Book;
-import com.bayamp.santaclara2020.data.utils.Student;
+import com.bayamp.santaclara2020.userdefined.objects.Book;
+import com.bayamp.santaclara2020.data.utils.DummyStudent;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
@@ -27,13 +27,13 @@ public class StringUtilTests extends BaseClass {
     }
 
     @Test(dataProvider = "getXMLData", dataProviderClass = BayampDataProvider.class)
-    public void registration(Student student) {
+    public void registration(DummyStudent student) {
 
         Reporter.log(student.getString(), true);
     }
 
     @Test(dataProvider = "getJSONData", dataProviderClass = BayampDataProvider.class)
-    public void studentDetails(Student student) {
+    public void studentDetails(DummyStudent student) {
 
         Reporter.log(student.toString(), true);
     }

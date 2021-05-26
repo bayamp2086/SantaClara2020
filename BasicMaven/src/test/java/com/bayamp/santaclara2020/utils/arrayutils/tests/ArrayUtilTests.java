@@ -116,18 +116,27 @@ public class ArrayUtilTests extends BaseClass {
     }
 
     @Test(groups = { "arrays", "p1", "smoke" })
-    public void sumTenTest() {
+    public void checkSumTest() {
         // TEST DATA
-        int[] myInputArray = { 2, 7, 3, 40 };
-        String expectedOutput = "(7,3) ";
+        int[] myInputArray = {3,4,5,7,2,8,9,10,6};
+        int sum =10;
+        /*String expectedOutput = "(7,3) ";
         Reporter.log("The input array is :" + Arrays.toString(myInputArray));
-        Reporter.log("The expected output is :" + expectedOutput );
-        StringBuilder sb = ArrayUtils.sumTen(myInputArray);
-        String actualOutput = sb.toString();
+        Reporter.log("The expected output is :" + expectedOutput );*/
+        StringBuilder sb = ArrayUtils.checkSum(myInputArray,sum);
+        String pairs = sb.toString();
 
-        Reporter.log("The actual output  is :" + actualOutput);
-        Reporter.log("Perform Validations");
+        Reporter.log("The pairs are :" + pairs,true);
+       /* Reporter.log("Perform Validations");
         Assert.assertEquals(actualOutput, expectedOutput);
-        Reporter.log("Validations Complete");
+        Reporter.log("Validations Complete");*/
+    }
+
+    @Test(groups = { "arrays", "p1", "smoke" })
+    public void numberCountTest() {
+        // TEST DATA
+        int[] myInputArray = {2, 3, 3, 4, 10, 3, 5, 4, 1, 3, 3, 1, 7, 4};
+        StringBuilder sb =ArrayUtils.numberCount(myInputArray);
+        Reporter.log("Highest Repeating to lowest :" + sb.toString(),true);
     }
 }

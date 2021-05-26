@@ -1,5 +1,6 @@
 package com.bayamp.santaclara2020.data.utils;
 
+import com.bayamp.santaclara2020.userdefined.objects.Book;
 import com.opencsv.CSVReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,6 +24,7 @@ import java.util.*;
 
 public class BayampDataProvider {
     private final static String CSV_FILE_PATH = "src/test/resources/data/palindrome.csv";
+    private final static String TXT_FILE_PATH = "src/test/resources/data/produce.txt";
     private final static String BOOK_CSV_FILE_PATH = "src/test/resources/data/book-details.csv";
     private final static String MAP_CSV_FILE_PATH = "src/test/resources/data/test-data.csv";
     private final static String REGISTRATION_XML_FILE_PATH = "src/test/resources/data/registration-details.xml";
@@ -30,6 +32,7 @@ public class BayampDataProvider {
 
     private static String line = "";
     private static String cvsSplitBy = ",";
+    private static String txtSplitBy = "-";
     private static BufferedReader br;
     private static CSVReader reader = null;
 
@@ -56,6 +59,41 @@ public class BayampDataProvider {
         for (int i = 0; i < myData.length; i++) {
             line = br.readLine();
             values = line.split(cvsSplitBy);
+            Map<String, String> row = new HashMap<String, String>();
+            // creating a map object for every row
+            for (int j = 0; j < values.length; j++) {
+                row.put(keys[j], values[j]);
+
+            }
+            myData[i][0] = row;
+        }
+        System.out.println(Arrays.deepToString(myData));
+        return myData;
+    }
+
+    /**
+     * Method retrieves data from produce txt file and creates a map object
+     *
+     * @return Two dimensional array object
+     *
+     * @throws IOException
+     */
+    @DataProvider(name = "getTXTData")
+    public static Object[][] parseTXTFileToGetData() throws IOException {
+
+        Object[][] myData = new Object[3][1];
+        String[] values = null;
+
+        br = new BufferedReader(new FileReader(TXT_FILE_PATH));
+
+        // getting keys
+        line = br.readLine();
+        String[] keys = line.split(txtSplitBy);
+
+        // getting values
+        for (int i = 0; i < myData.length; i++) {
+            line = br.readLine();
+            values = line.split(txtSplitBy);
             Map<String, String> row = new HashMap<String, String>();
             // creating a map object for every row
             for (int j = 0; j < values.length; j++) {
@@ -133,7 +171,7 @@ public class BayampDataProvider {
                 String lastName = eElement.getElementsByTagName("lastName").item(0).getTextContent();
                 String userName = eElement.getElementsByTagName("userName").item(0).getTextContent();
                 String pwd = eElement.getElementsByTagName("pwd").item(0).getTextContent();
-                Student student = new Student(firstName, lastName, userName, pwd);
+                DummyStudent student = new DummyStudent(firstName, lastName, userName, pwd);
                 students[temp][0] = student;
 
             }
@@ -169,7 +207,7 @@ public class BayampDataProvider {
             String firstName = (String) jo.get("firstName");
             String lastName = (String) jo.get("lastName");
             String id = (String) jo.get("id");
-            Student student = new Student(firstName, lastName, id);
+            DummyStudent student = new DummyStudent(firstName, lastName, id);
             students[i][0] = student;
         }
         return students;

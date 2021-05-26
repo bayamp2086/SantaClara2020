@@ -1,6 +1,8 @@
 package com.bayamp.santaclara2020.data.utils;
 
-import java.util.Arrays;
+import org.testng.annotations.Test;
+
+import java.util.*;
 
 public class ArrayUtils {
 
@@ -13,14 +15,15 @@ public class ArrayUtils {
      */
     public static int[] reverseArray(int[] myArray) {
         int[] newArray = new int[myArray.length];
-        int counter = newArray.length-1;
+        int counter = newArray.length - 1;
 
-        for(int i=0; i<myArray.length;i++) {
-            newArray[counter]=myArray[i];
+        for (int i = 0; i < myArray.length; i++) {
+            newArray[counter] = myArray[i];
             counter--;
         }
         return newArray;
     }
+
     /*
      * Method to remove duplicates in an array
      *
@@ -44,7 +47,7 @@ public class ArrayUtils {
                 }
             }
         }
-       // System.out.println("The length of array after removing duplicates is:" + len);
+        // System.out.println("The length of array after removing duplicates is:" + len);
         int[] noDuplicatesArray = Arrays.copyOf(myArray, len);
         return noDuplicatesArray;
     }
@@ -153,9 +156,9 @@ public class ArrayUtils {
      * @param an integer array and the number to be found
      *
      */
-    public static boolean searchNumber(int[] myArray,int number) {
+    public static boolean searchNumber(int[] myArray, int number) {
 
-        boolean found= false;
+        boolean found = false;
         for (int i = 0; i < myArray.length; i++) {
             if (number == myArray[i]) {
                 //System.out.println("Number found in the index: " + i);
@@ -168,16 +171,16 @@ public class ArrayUtils {
     /*
      * Method to find pair of all numbers in an array whose sum is going to be 10
      *
-     * @param an integer array
+     * @param an integer array, and a number
      *
      * @return string that has all the pairs of numbers whose sum equals to 10
      */
-    public static StringBuilder sumTen(int[] myArray) {
-        int length= myArray.length;
+    public static StringBuilder checkSum(int[] myArray, int sum) {
+        int length = myArray.length;
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<length;i++) {
-            for(int j=i+1; j<length;j++) {
-                if(myArray[i]+myArray[j]==10) {
+        for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j < length; j++) {
+                if (myArray[i] + myArray[j] == sum) {
                     sb.append("(");
                     sb.append(myArray[i]);
                     sb.append(",");
@@ -189,4 +192,132 @@ public class ArrayUtils {
         }
         return sb;
     }
+
+    /*
+     * Method to find  count of numbers from an array of numbers and display in descending order
+     *
+     * @param an integer array
+     *
+     * @return string that has count of number in descending order
+     */
+    public static StringBuilder numberCount(int[] myArray) {
+        int length = myArray.length;
+        StringBuilder sb = new StringBuilder();
+
+        //LinkedHashMap preserves the ordering of elements in which they are inserted
+        LinkedHashMap<Integer, Integer> reverseSortedMap = new LinkedHashMap<>();
+        Map<Integer, Integer> unSortedMap = new HashMap();
+
+        for (int i = 0; i < length; ++i) {
+            int item = myArray[i];
+
+            if (unSortedMap.containsKey(item))
+                unSortedMap.put(item, unSortedMap.get(item) + 1);
+            else
+                unSortedMap.put(item, 1);
+        }
+
+        //Comparator.reverseOrder() for reverse ordering
+        unSortedMap.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+               .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+
+        for (Map.Entry<Integer, Integer> e : reverseSortedMap.entrySet())
+            {
+                sb.append("\n");
+                sb.append(e.getKey());
+                sb.append(":");
+                sb.append(e.getValue());
+            }
+        return sb;
+    }
+
+    /*
+     * Method which takes int[] as input and returns the element of
+       the array which is same as the index of that element.
+     *
+     * @param an integer array
+     *
+     * @return string that has the element of
+       the array which is same as the index of that element.
+*/
+    public static StringBuilder sameIndexElement(int[] myArray) {
+        int length= myArray.length;
+        boolean m =false;
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<length;i++) {
+            if (i == myArray[i]) {
+                if(m==true){
+                    sb.append(",");
+                }
+                sb.append(myArray[i]);
+                m=true;
+            } else {
+                continue;
+            }
+        }
+       return sb;
+    }
+
+    public static String replaceAllSpaceExceptLastOne(String inputString){
+        int index = 0;
+        String finalString = null;
+        char[] chars = inputString.toCharArray();
+        int len = inputString.length();
+        for (int i=len-1;i>0;i--){
+            if(Character.isWhitespace(chars[i])){
+                 index = i;
+                 break;
+            }
+        }
+        for (int i=0;i<len;i++){
+            if(Character.isWhitespace(chars[i]) && i!=index){
+                
+            }
+        }
+    return finalString;
+    }
+
+
+    /*
+     * Method which takes int[] as input and returns the index of the element if the element is present in the array
+     *
+     * @param an integer array
+     *
+     * @return string that has the index of the element if the element is present in the array
+     */
+    public static StringBuilder indexOfElement(int[] myArray,int a) {
+        int length= myArray.length;
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<length;i++) {
+            if (myArray[i]==a) {
+            sb.append(i);
+            }
+            else {
+                continue;
+            }
+        }
+        return sb;
+    }
+
+    @Test
+    public void splitDigitsfromNumberAndCompute() {
+        int number = 153;
+        int sum = 0;
+        boolean flag =false;
+        String str = (new Integer(number)).toString();
+        char[] digits = str.toCharArray();
+        int[] arr = new int[digits.length];
+        for (int i = 0; i < digits.length; i++) {
+            arr[i] = Character.getNumericValue(digits[i]);
+        }
+        for (int a : arr) {
+            System.out.println(a);
+            sum = sum + (int)Math.pow(a,3);
+        }
+        if (sum == 153) {
+            flag= true;
+        }
+        System.out.println(flag);
+    }
 }
+

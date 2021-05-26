@@ -1,6 +1,6 @@
 package com.bayamp.santaclara2020.data.utils;
 
-public class Student {
+public class DummyStudent {
 
     private String firstName;
     private String lastName;
@@ -14,7 +14,7 @@ public class Student {
      * @param userName
      * @param pwd
      */
-    public Student(String firstName, String lastName, String userName, String pwd) {
+    public DummyStudent(String firstName, String lastName, String userName, String pwd) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -26,7 +26,7 @@ public class Student {
      * @param lastName
      * @param id
      */
-    public Student(String firstName, String lastName, String id) {
+    public DummyStudent(String firstName, String lastName, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;

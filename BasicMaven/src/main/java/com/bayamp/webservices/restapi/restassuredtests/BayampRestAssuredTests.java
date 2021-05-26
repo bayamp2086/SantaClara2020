@@ -15,6 +15,7 @@ public class BayampRestAssuredTests {
 
     @Test
     public static Response createEngineerResource() {
+        System.out.println("testing");
         JSONObject jsonObj = new JSONObject();
         jsonObj.put("name", "RestAssuredPost");
 
